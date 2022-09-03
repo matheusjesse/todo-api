@@ -8,8 +8,9 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
       },
-      note_text: {
+      noteText: {
         type: Sequelize.STRING,
+        field: 'note_text',
         allowNull: false
       },
       dayOfTheWeekId: {
