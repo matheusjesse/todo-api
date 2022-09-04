@@ -12,8 +12,8 @@ User.init({
   id: {
     type: INTEGER,
     allowNull: false,
-    primaryKey: false,
-    autoIncrement: false,
+    primaryKey: true,
+    autoIncrement: true,
   },
   userName: {
     type: STRING,
