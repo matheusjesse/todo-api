@@ -11,4 +11,11 @@ export default class LoginService implements ILoginService {
     const token = JwtService.sign({ email, password });
     return token;
   };
+
+  findUser = async (email: string): Promise<User> => {
+    const user = await User.findOne({
+      where: { email },
+    });
+    return user as User;
+  };
 }
