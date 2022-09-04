@@ -12,4 +12,9 @@ export default class TodoController {
     if (todos.length === 0) return res.status(200).json({ message: 'No todo found' });
     res.status(200).json(todos);
   }
+
+  async createTodo(req: Request, res: Response) {
+    const todo = await this.TodoService.createTodo(req.body);
+    res.status(201).json(todo);
+  }
 }
