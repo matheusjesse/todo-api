@@ -3,12 +3,13 @@ import ILoginService from '../interfaces/IloginService';
 import JwtService from '../utils/jwtService';
 
 export default class LoginService implements ILoginService {
-  login = async (email: string, password: string): Promise<string> => {
-    await User.findOne({
+  login = async (email: string): Promise<string> => {
+    const user = await User.findOne({
       where: { email },
       attributes: { exclude: ['password', 'userName'] },
     });
-    const token = JwtService.sign({ email, password });
+    const { userName, id } = user as User;
+    const token = JwtService.sign({ email, userName, id });
     return token;
   };
 
