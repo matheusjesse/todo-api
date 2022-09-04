@@ -6,7 +6,7 @@ export default class LoginService implements ILoginService {
   login = async (email: string): Promise<string> => {
     const user = await User.findOne({
       where: { email },
-      attributes: { exclude: ['password', 'userName'] },
+      attributes: { exclude: ['password'] },
     });
     const { userName, id } = user as User;
     const token = JwtService.sign({ email, userName, id });
