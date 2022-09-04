@@ -8,19 +8,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-class LoginController {
-    constructor(LoginService) {
-        this.LoginService = LoginService;
-    }
-    login(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const { email, password } = req.body;
-            const token = yield this.LoginService.login(email, password);
-            if (!token)
-                res.status(400).json({ message: 'user not found' });
-            res.status(200).json({ token });
+const toDos_1 = __importDefault(require("../database/models/toDos"));
+const dayPeriod_1 = __importDefault(require("../database/models/dayPeriod"));
+class TodoService {
+    constructor() {
+        this.findAll = (id) => __awaiter(this, void 0, void 0, function* () {
+            const todos = yield toDos_1.default.findAll({
+                where: { userId: id },
+                include: [
+                    { model: dayPeriod_1.default },
+                ],
+            });
+            return todos;
         });
     }
 }
-exports.default = LoginController;
+exports.default = TodoService;

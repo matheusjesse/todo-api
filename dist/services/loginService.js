@@ -16,14 +16,20 @@ const user_1 = __importDefault(require("../database/models/user"));
 const jwtService_1 = __importDefault(require("../utils/jwtService"));
 class LoginService {
     constructor() {
-        this.login = (email, password) => __awaiter(this, void 0, void 0, function* () {
+        this.login = (email) => __awaiter(this, void 0, void 0, function* () {
             const user = yield user_1.default.findOne({
                 where: { email },
-                attributes: { exclude: ['password', 'userName'] },
+                attributes: { exclude: ['password'] },
             });
-            console.log(user);
-            const token = jwtService_1.default.sign({ email, password });
+            const { userName, id } = user;
+            const token = jwtService_1.default.sign({ email, userName, id });
             return token;
+        });
+        this.findUser = (email) => __awaiter(this, void 0, void 0, function* () {
+            const user = yield user_1.default.findOne({
+                where: { email },
+            });
+            return user;
         });
     }
 }

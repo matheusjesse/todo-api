@@ -31,6 +31,7 @@ DayPeriod.init({
   sequelize: db,
   modelName: 'dayPeriod',
   timestamps: false,
+  tableName: 'dayPeriod',
 });
 
 export default DayPeriod;

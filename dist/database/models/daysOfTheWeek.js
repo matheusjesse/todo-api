@@ -46,5 +46,6 @@ DaysOfTheWeek.init({
     sequelize: _1.default,
     modelName: 'daysOfTheWeek',
     timestamps: false,
+    tableName: 'daysOfTheWeek',
 });
 exports.default = DaysOfTheWeek;

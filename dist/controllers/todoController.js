@@ -9,18 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-class LoginController {
-    constructor(LoginService) {
-        this.LoginService = LoginService;
+class TodoController {
+    constructor(TodoService) {
+        this.TodoService = TodoService;
     }
-    login(req, res) {
+    findAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { email, password } = req.body;
-            const token = yield this.LoginService.login(email, password);
-            if (!token)
-                res.status(400).json({ message: 'user not found' });
-            res.status(200).json({ token });
+            const { id } = req.params;
+            const todos = yield this.TodoService.findAll(Number(id));
+            res.status(200).json(todos);
         });
     }
 }
-exports.default = LoginController;
+exports.default = TodoController;

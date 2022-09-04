@@ -40,11 +40,14 @@ ToDos.init({
   modelName: 'toDos',
   underscored: true,
   timestamps: false,
+  tableName: 'toDos',
 });
 
-User.hasMany(ToDos, { foreignKey: 'id', as: 'todos' });
-ToDos.belongsTo(User, { foreignKey: 'userId', targetKey: 'id' });
-DayPeriod.belongsTo(ToDos, { foreignKey: 'dayPeriodId', targetKey: 'id' });
-DaysOfTheWeek.belongsTo(ToDos, { foreignKey: 'dayOfTheWeekId', targetKey: 'id' });
+User.hasMany(ToDos, { foreignKey: 'userId', as: 'todos' });
+
+DayPeriod.hasOne(ToDos, { foreignKey: 'dayPeriodId', as: 'dayPeriod' });
+ToDos.belongsTo(DayPeriod);
+DaysOfTheWeek.hasOne(ToDos, { foreignKey: { name: 'dayOfTheWeekId' }, as: 'daysOfTheWeek' });
+ToDos.belongsTo(DaysOfTheWeek, { foreignKey: { name: 'dayOfTheWeekId' } });
 
 export default ToDos;
