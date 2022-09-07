@@ -1,6 +1,7 @@
 export default interface IToDo {
   id?: number,
   noteText: string,
+  completed: boolean,
   userId: number,
   dayPeriod?: IDayPeriod,
   daysOfTheWeek?: IDayOfTheWeek

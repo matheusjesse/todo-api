@@ -1,4 +1,4 @@
-import { Model, STRING, INTEGER } from 'sequelize';
+import { Model, STRING, INTEGER, BOOLEAN } from 'sequelize';
 import db from '.';
 import DayPeriod from './dayPeriod';
 import User from './user';
@@ -7,6 +7,7 @@ import DaysOfTheWeek from './daysOfTheWeek';
 class ToDos extends Model {
   id!: number;
   noteText!: string;
+  completed!: boolean;
   dayOfTheWeekId!: number;
   dayPeriodId!: number;
   userId!: number;
@@ -22,6 +23,10 @@ ToDos.init({
   noteText: {
     type: STRING,
     allowNull: false,
+  },
+  completed: {
+    type: BOOLEAN,
+    defaultValue: false,
   },
   dayOfTheWeekId: {
     type: INTEGER,

@@ -13,6 +13,10 @@ module.exports = {
         field: 'note_text',
         allowNull: false
       },
+      completed: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
       dayOfTheWeekId: {
         type: Sequelize.INTEGER,
         allowNull: false,
