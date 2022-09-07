@@ -19,12 +19,13 @@ export default class TodoService implements ITodoService {
   };
 
   createTodo = async (todo: IToDo): Promise<ToDos> => {
-    const { noteText, userId } = todo as IToDo;
+    const { noteText, completed, userId } = todo as IToDo;
     const dayPeriodId = await TodoService.createDayPeriod(todo.dayPeriod as IDayPeriod);
     const dayOfTheWeekId = await TodoService
       .createDayOfTheWeek(todo.daysOfTheWeek as IDayOfTheWeek);
     const todoData = await ToDos.create({
       noteText,
+      completed,
       dayOfTheWeekId,
       dayPeriodId,
       userId,

@@ -6,6 +6,10 @@ const todoSchema = Joi.object({
       'string.base': 'Some field has the wrong type',
       'string.max': '"noteText" length must be at least 35 characters long'
     }),
+    completed: Joi.boolean().required().messages({
+      'any.required': 'Some required fields are missing',
+      'boolean.base': 'Some field has the wrong  type'
+    }),
     userId: Joi.number().required().messages({
       'any.required': 'Some required fields are missing',
       'number.base': 'Some field has the wrong type'
