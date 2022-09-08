@@ -16,4 +16,10 @@ router.patch(
   todoValidation.validateCompleted,
   (req, res) => todoController.todoToggleStatus(req, res),
 );
+router.put(
+  '/:id',
+  todoValidation.validateUpdateTodo,
+  (req, res) => todoController.editTodo(req, res),
+);
+
 export default router;

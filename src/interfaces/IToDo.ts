@@ -7,6 +7,15 @@ export default interface IToDo {
   daysOfTheWeek?: IDayOfTheWeek
 }
 
+export interface ITodoUpdate {
+  id: number,
+  noteText: string,
+  completed: boolean,
+  userId: number,
+  dayPeriod: IDayPeriod,
+  daysOfTheWeek: IDayOfTheWeek
+}
+
 export interface IDayPeriod {
   morning: boolean,
   afternoon: boolean,

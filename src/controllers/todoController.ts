@@ -23,4 +23,9 @@ export default class TodoController {
 
     return res.status(200).json(todoToggleStatusData);
   }
+
+  async editTodo(req: Request, res: Response) {
+    const editTodoData = await this.TodoService.editTodo(req.body);
+    return res.status(200).json({ message: editTodoData });
+  }
 }

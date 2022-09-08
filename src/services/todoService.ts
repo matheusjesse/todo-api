@@ -2,7 +2,7 @@ import ToDos from '../database/models/toDos';
 import ITodoService from '../interfaces/ITodoService';
 import DayPeriod from '../database/models/dayPeriod';
 import DaysOfTheWeek from '../database/models/daysOfTheWeek';
-import IToDo, { IDayOfTheWeek, IDayPeriod } from '../interfaces/IToDo';
+import IToDo, { IDayOfTheWeek, IDayPeriod, ITodoUpdate } from '../interfaces/IToDo';
 
 export default class TodoService implements ITodoService {
   findAll = async (id: number): Promise<IToDo[]> => {
@@ -40,14 +40,31 @@ export default class TodoService implements ITodoService {
         id,
       },
     });
-    const todoUpdated = await ToDos.findOne({
-      where: { id },
-      attributes: { exclude: [
-        'dayOfTheWeekId',
-        'dayPeriodId',
-      ] } });
+    const todoUpdated = await TodoService.findTodo(id);
+
     return todoUpdated as IToDo;
   };
+
+  editTodo = async (todo: ITodoUpdate) => {
+    const { id, noteText, dayPeriod, daysOfTheWeek } = todo;
+    const todoData = await ToDos.findOne({ where: { id } });
+    const { dayPeriodId, dayOfTheWeekId } = todoData as ToDos;
+    await ToDos.update({
+      noteText,
+    }, {
+      where: { id },
+    });
+    await TodoService.updateDayOfTheWeek(daysOfTheWeek, dayOfTheWeekId);
+    await TodoService.updateDayPeriod(dayPeriod, dayPeriodId);
+    return 'ToDo Atualizado!';
+  };
+
+  static findTodo = async (id: number) => ToDos.findOne({
+    where: { id },
+    attributes: { exclude: [
+      'dayOfTheWeekId',
+      'dayPeriodId',
+    ] } });
 
   static createDayPeriod = async (dayPeriod: IDayPeriod) => {
     const { morning, afternoon, night } = dayPeriod;
@@ -75,5 +92,35 @@ export default class TodoService implements ITodoService {
       saturday,
     });
     return dayOfTheWeekData.id;
+  };
+
+  static updateDayPeriod = async (dayPeriod: IDayPeriod, id: number) => {
+    const { morning, afternoon, night } = dayPeriod;
+    await DayPeriod.update({
+      morning,
+      afternoon,
+      night,
+    }, {
+      where: { id },
+    });
+  };
+
+  static updateDayOfTheWeek = async (dayOfTheWeek: IDayOfTheWeek, id: number) => {
+    const {
+      sunday, monday,
+      tuesday, wednesday,
+      thrusday, friday, saturday,
+    } = dayOfTheWeek as IDayOfTheWeek;
+    await DaysOfTheWeek.update({
+      sunday,
+      monday,
+      tuesday,
+      wednesday,
+      thrusday,
+      friday,
+      saturday,
+    }, {
+      where: { id },
+    });
   };
 }
