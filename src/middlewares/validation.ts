@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import ILoginService from '../interfaces/IloginService';
-import loginSchema from '../schemas/loginValidation';
+import loginSchema, { registerSchema } from '../schemas/loginValidation';
 import JwtService from '../utils/jwtService';
+import User from '../database/models/user';
 
 export default class Validation {
   constructor(private LoginService: ILoginService) { }
@@ -26,6 +27,15 @@ export default class Validation {
       return res.status(401).json({ message: 'Token must be a valid token' });
     }
 
+    next();
+  };
+
+  public registerValidation = async (req: Request, res: Response, next: NextFunction) => {
+    const { error } = registerSchema.validate(req.body);
+    if (error) return res.status(400).json({ message: error.message });
+    const { email } = req.body;
+    const user = await User.findOne({ where: { email } });
+    if (user) return res.status(200).json({ message: 'This "email" is already in use' });
     next();
   };
 }

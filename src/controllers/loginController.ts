@@ -12,4 +12,9 @@ export default class LoginController {
     if (!token) res.status(400).json({ message: 'user not found' });
     res.status(200).json({ token });
   }
+
+  async createUser(req: Request, res: Response) {
+    const userRegistered = await this.LoginService.createUser(req.body);
+    res.status(201).json({ message: userRegistered });
+  }
 }

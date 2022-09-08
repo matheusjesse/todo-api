@@ -19,4 +19,10 @@ export default class LoginService implements ILoginService {
     });
     return user as User;
   };
+
+  createUser = async (userData: User): Promise<string> => {
+    const { userName, email, password } = userData;
+    await User.create({ userName, email, password });
+    return 'User registered';
+  };
 }
