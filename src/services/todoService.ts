@@ -45,6 +45,13 @@ export default class TodoService implements ITodoService {
     return todoUpdated as IToDo;
   };
 
+  deleteTodo = async (id: number) => {
+    await ToDos.destroy({
+      where: { id },
+    });
+    return 'ToDo Deleted';
+  };
+
   editTodo = async (todo: ITodoUpdate) => {
     const { id, noteText, dayPeriod, daysOfTheWeek } = todo;
     const todoData = await ToDos.findOne({ where: { id } });
@@ -56,7 +63,7 @@ export default class TodoService implements ITodoService {
     });
     await TodoService.updateDayOfTheWeek(daysOfTheWeek, dayOfTheWeekId);
     await TodoService.updateDayPeriod(dayPeriod, dayPeriodId);
-    return 'ToDo Atualizado!';
+    return 'ToDo Updated!';
   };
 
   static findTodo = async (id: number) => ToDos.findOne({

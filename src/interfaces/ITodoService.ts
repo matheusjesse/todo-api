@@ -6,4 +6,5 @@ export default interface ITodoService {
   createTodo(todo: IToDo): Promise<ToDos>
   todoToggleStatus(todo: { id: number, completed: boolean }): Promise<IToDo>
   editTodo(todo: ITodoUpdate): Promise<string>
+  deleteTodo(id: number): Promise<string>
 }

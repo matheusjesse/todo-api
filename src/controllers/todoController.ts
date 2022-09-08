@@ -28,4 +28,10 @@ export default class TodoController {
     const editTodoData = await this.TodoService.editTodo(req.body);
     return res.status(200).json({ message: editTodoData });
   }
+
+  async deleteTodo(req: Request, res: Response) {
+    const { id } = req.body;
+    const deleteToDo = await this.TodoService.deleteTodo(Number(id));
+    return res.status(200).json({ mesage: deleteToDo });
+  }
 }

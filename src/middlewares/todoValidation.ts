@@ -3,6 +3,7 @@ import ToDos from '../database/models/toDos';
 import todoSchema, { todoCompletedSchema } from '../schemas/todoValidation';
 import ITodoService from '../interfaces/ITodoService';
 import todoUpdateSchema from '../schemas/todoUpdateValidation';
+import deletionSchema from '../schemas/todoDeletionValidation';
 
 export default class ValidationTodo {
   constructor(private TodoService: ITodoService) { }
@@ -34,6 +35,21 @@ export default class ValidationTodo {
       return res.status(400).json({
         message: 'Request failed due id conflict',
       });
+    }
+    const todoCheck = await ToDos.findOne({ where: { id } });
+    if (!todoCheck) {
+      return res.status(200).json({ message: `Todo with id ${id} Not Found` });
+    }
+    next();
+  };
+
+  public validateDeletion = async (req: Request, res: Response, next: NextFunction) => {
+    const { error } = deletionSchema.validate(req.body);
+    if (error) return res.status(400).json({ message: error.message });
+    const { id } = req.body;
+    if (typeof id !== 'number') {
+      return res.status(400).json({
+        message: 'Some field has the wrong type' });
     }
     const todoCheck = await ToDos.findOne({ where: { id } });
     if (!todoCheck) {

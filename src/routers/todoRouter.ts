@@ -21,5 +21,10 @@ router.put(
   todoValidation.validateUpdateTodo,
   (req, res) => todoController.editTodo(req, res),
 );
+router.delete(
+  '/',
+  todoValidation.validateDeletion,
+  (req, res) => todoController.deleteTodo(req, res),
+);
 
 export default router;
