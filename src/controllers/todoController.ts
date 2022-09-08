@@ -17,4 +17,10 @@ export default class TodoController {
     const todo = await this.TodoService.createTodo(req.body);
     res.status(201).json(todo);
   }
+
+  async todoToggleStatus(req: Request, res: Response) {
+    const todoToggleStatusData = await this.TodoService.todoToggleStatus(req.body);
+
+    return res.status(200).json(todoToggleStatusData);
+  }
 }

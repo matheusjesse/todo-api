@@ -33,6 +33,22 @@ export default class TodoService implements ITodoService {
     return todoData;
   };
 
+  todoToggleStatus = async (todo: { id: number, completed: boolean }): Promise<IToDo> => {
+    const { id, completed } = todo;
+    await ToDos.update({ completed }, {
+      where: {
+        id,
+      },
+    });
+    const todoUpdated = await ToDos.findOne({
+      where: { id },
+      attributes: { exclude: [
+        'dayOfTheWeekId',
+        'dayPeriodId',
+      ] } });
+    return todoUpdated as IToDo;
+  };
+
   static createDayPeriod = async (dayPeriod: IDayPeriod) => {
     const { morning, afternoon, night } = dayPeriod;
     const dayPeriodData = await DayPeriod.create({

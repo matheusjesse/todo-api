@@ -60,4 +60,15 @@ const todoSchema = Joi.object({
     })
 });
 
+const todoCompletedSchema = Joi.object({
+  id: Joi.number().required().messages({
+    'any.required': 'Some required fields are missing',
+    'number.base': 'Some field has the wrong type'
+  }),
+  completed: Joi.boolean().required().messages({
+    'any.required': 'Some required fields are missing',
+    'boolean.base': 'Some field has the wrong  type'
+  })
+});
 export default todoSchema;
+export { todoCompletedSchema };
