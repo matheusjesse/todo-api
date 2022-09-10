@@ -1,6 +1,9 @@
 import User from '../database/models/user';
 import ILoginService from '../interfaces/IloginService';
 import JwtService from '../utils/jwtService';
+import ToDos from '../database/models/toDos';
+import DayPeriod from '../database/models/dayPeriod';
+import DaysOfTheWeek from '../database/models/daysOfTheWeek';
 
 export default class LoginService implements ILoginService {
   login = async (email: string): Promise<string> => {
@@ -27,6 +30,14 @@ export default class LoginService implements ILoginService {
   };
 
   deleteUser = async (id: number): Promise<string> => {
+    const todos = await ToDos.findAll({ where: { userId: id } });
+    await ToDos.destroy({ where: { userId: id } });
+    console.log(todos);
+    todos.map(async (todo) => {
+      const { dayPeriodId, dayOfTheWeekId } = todo as ToDos;
+      await DayPeriod.destroy({ where: { id: dayPeriodId } });
+      await DaysOfTheWeek.destroy({ where: { id: dayOfTheWeekId } });
+    });
     await User.destroy({
       where: { id },
     });

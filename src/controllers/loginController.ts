@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import User from '../database/models/user';
 import ILoginService from '../interfaces/IloginService';
 
 export default class LoginController {
@@ -20,6 +21,8 @@ export default class LoginController {
 
   async deleteUser(req: Request, res: Response) {
     const { id } = req.body;
+    const user = await User.findOne({ where: { id } });
+    if (!user) return res.status(400).json({ message: 'user not found' });
     const token = await this.LoginService.deleteUser(Number(id));
     return res.status(200).json({ token });
   }

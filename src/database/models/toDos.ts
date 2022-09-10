@@ -48,7 +48,7 @@ ToDos.init({
   tableName: 'toDos',
 });
 
-User.hasMany(ToDos, { foreignKey: 'userId', as: 'todos' });
+User.hasMany(ToDos, { foreignKey: 'userId', as: 'todos', onDelete: 'CASCADE' });
 
 DayPeriod.hasOne(ToDos, {
   foreignKey: 'dayPeriodId',
