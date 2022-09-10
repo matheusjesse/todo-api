@@ -4,6 +4,7 @@ import todoSchema, { todoCompletedSchema } from '../schemas/todoValidation';
 import ITodoService from '../interfaces/ITodoService';
 import todoUpdateSchema from '../schemas/todoUpdateValidation';
 import deletionSchema from '../schemas/todoDeletionValidation';
+import JwtService from '../utils/jwtService';
 
 export default class ValidationTodo {
   constructor(private TodoService: ITodoService) { }
@@ -23,6 +24,18 @@ export default class ValidationTodo {
     if (!todoCheck) {
       return res.status(200).json({ message: `Todo with id ${id} Not Found` });
     }
+    next();
+  };
+
+  public tokenValidation = async (req: Request, res: Response, next: NextFunction) => {
+    const token: string = req.headers.authorization as string;
+    if (!token) return res.status(401).json({ message: 'No token provided.' });
+    try {
+      JwtService.verify(token) as { email: string, userName: string, id: number };
+    } catch (error) {
+      return res.status(401).json({ message: 'Token must be a valid token' });
+    }
+
     next();
   };
 

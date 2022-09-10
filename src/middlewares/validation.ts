@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import ILoginService from '../interfaces/IloginService';
 import loginSchema, { registerSchema } from '../schemas/loginValidation';
-import JwtService from '../utils/jwtService';
 import User from '../database/models/user';
 
 export default class Validation {
@@ -16,17 +15,6 @@ export default class Validation {
     if (user.password !== password) {
       return res.status(401).json({ message: 'Incorrect email or password' });
     }
-    next();
-  };
-
-  public tokenValidation = async (req: Request, res: Response, next: NextFunction) => {
-    const token: string = req.headers.authorization as string;
-    try {
-      JwtService.verify(token) as { email: string, password: string };
-    } catch (error) {
-      return res.status(401).json({ message: 'Token must be a valid token' });
-    }
-
     next();
   };
 
