@@ -17,4 +17,10 @@ export default class LoginController {
     const userRegistered = await this.LoginService.createUser(req.body);
     res.status(201).json({ message: userRegistered });
   }
+
+  async deleteUser(req: Request, res: Response) {
+    const { id } = req.body;
+    const token = await this.LoginService.deleteUser(Number(id));
+    return res.status(200).json({ token });
+  }
 }

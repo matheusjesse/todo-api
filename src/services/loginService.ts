@@ -25,4 +25,12 @@ export default class LoginService implements ILoginService {
     await User.create({ userName, email, password });
     return 'User registered';
   };
+
+  deleteUser = async (id: number): Promise<null> => {
+    await User.destroy({
+      where: { id },
+    });
+    const token = null;
+    return token;
+  };
 }

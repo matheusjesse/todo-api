@@ -15,5 +15,9 @@ router.post(
   validation.registerValidation,
   (req, res) => loginController.createUser(req, res),
 );
+router.delete(
+  '/',
+  (req, res) => loginController.deleteUser(req, res),
+);
 
 export default router;
