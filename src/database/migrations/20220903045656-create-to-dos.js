@@ -21,6 +21,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         field: 'day_of_the_week_id',
+        onDelete: 'CASCADE',
         references: {
           model: 'daysOfTheWeek',
           key: 'id'
@@ -30,6 +31,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         field: 'day_period_id',
+        onDelete: 'CASCADE',
         references: {
           model: 'dayPeriod',
           key: 'id'
@@ -39,6 +41,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         field: 'user_id',
+        onDelete: 'CASCADE',
         references: {
           model: 'users',
           key: 'id'
