@@ -53,16 +53,20 @@ User.hasMany(ToDos, { foreignKey: 'userId', as: 'todos' });
 DayPeriod.hasOne(ToDos, {
   foreignKey: 'dayPeriodId',
   as: 'dayPeriod',
-  onDelete: 'cascade',
+  onDelete: 'CASCADE',
 });
-ToDos.belongsTo(DayPeriod);
+ToDos.belongsTo(DayPeriod, {
+  onDelete: 'CASCADE',
+  foreignKey: { allowNull: false },
+});
 DaysOfTheWeek.hasOne(ToDos, {
   foreignKey: { name: 'dayOfTheWeekId' },
   as: 'daysOfTheWeek',
-  onDelete: 'cascade',
+  onDelete: 'CASCADE',
 });
 ToDos.belongsTo(DaysOfTheWeek, {
-  foreignKey: { name: 'dayOfTheWeekId' },
+  foreignKey: { name: 'dayOfTheWeekId', allowNull: false },
+  onDelete: 'CASCADE',
 });
 
 export default ToDos;

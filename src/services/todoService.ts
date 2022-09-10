@@ -46,9 +46,13 @@ export default class TodoService implements ITodoService {
   };
 
   deleteTodo = async (id: number) => {
+    const todo = await ToDos.findOne({ where: { id } });
+    const { dayPeriodId, dayOfTheWeekId } = todo as ToDos;
     await ToDos.destroy({
       where: { id },
     });
+    await DayPeriod.destroy({ where: { id: dayPeriodId } });
+    await DaysOfTheWeek.destroy({ where: { id: dayOfTheWeekId } });
     return 'ToDo Deleted';
   };
 
