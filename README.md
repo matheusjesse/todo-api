@@ -396,4 +396,4 @@ Populando o banco de dados
 - Biblioteca Joi 
 - Biblioteca Jsonwebtoken
 
-[Meu Linkedin](www.linkedin.com/in/matheusjesse)
+[Meu Linkedin](https://www.linkedin.com/in/matheusjesse)
