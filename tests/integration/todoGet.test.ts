@@ -3,10 +3,8 @@ import sinon from 'sinon';
 import chaiHttp from 'chai-http';
 import app from '../../src/index';
 import ToDos from '../../src/database/models/toDos';
-import { todoMock, todoPostMockResponse, todoPostMockBody } from '../mocks/todoMock';
+import { todoMock } from '../mocks/todoMock';
 import { tokenMock } from '../mocks/tokenMock';
-import DayPeriod from '../../src/database/models/dayPeriod';
-import DaysOfTheWeek from '../../src/database/models/daysOfTheWeek';
 
 chai.use(chaiHttp);
 const { expect } = chai;

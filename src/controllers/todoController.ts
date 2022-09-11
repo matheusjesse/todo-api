@@ -32,6 +32,6 @@ export default class TodoController {
   async deleteTodo(req: Request, res: Response) {
     const { id } = req.body;
     const deleteToDo = await this.TodoService.deleteTodo(Number(id));
-    return res.status(200).json({ mesage: deleteToDo });
+    return res.status(200).json({ message: deleteToDo });
   }
 }
