@@ -35,7 +35,7 @@ describe('Todos', () => {
       sinon.stub(DaysOfTheWeek, "create").resolves( todoMock[0].daysOfTheWeek as DaysOfTheWeek);
       sinon.stub(ToDos, "create").resolves(todoPostMockResponse as unknown as ToDos);
       const { token } = tokenMock;
-      const { noteText, completed, daysOfTheWeek, dayPeriod,  userId } = todoPostMockBody;
+      const { daysOfTheWeek, dayPeriod,  userId } = todoPostMockBody;
       const response = await chai.request(app)
           .post('/todos')          
           .set({ Authorization: token})
