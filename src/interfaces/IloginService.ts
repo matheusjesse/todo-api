@@ -5,4 +5,5 @@ export default interface ILoginService {
   findUser(email: string): Promise<User>
   createUser(userData: User): Promise<string>
   deleteUser(id: number): Promise<string>
+  updatePassword(id: number, newPassword: string): Promise<string>
 }

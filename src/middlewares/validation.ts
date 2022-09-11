@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import ILoginService from '../interfaces/IloginService';
 import loginSchema, { registerSchema } from '../schemas/loginValidation';
 import User from '../database/models/user';
+import loginPasswordSchema from '../schemas/loginPassword';
 
 export default class Validation {
   constructor(private LoginService: ILoginService) { }
@@ -15,6 +16,13 @@ export default class Validation {
     if (user.password !== password) {
       return res.status(401).json({ message: 'Incorrect email or password' });
     }
+    next();
+  };
+
+  public loginPassworUpdate = async (req: Request, res: Response, next: NextFunction) => {
+    const { error } = loginPasswordSchema.validate(req.body);
+    if (error) return res.status(400).json({ message: error.message });
+
     next();
   };
 

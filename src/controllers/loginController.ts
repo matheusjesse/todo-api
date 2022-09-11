@@ -26,4 +26,10 @@ export default class LoginController {
     const token = await this.LoginService.deleteUser(Number(id));
     return res.status(200).json({ token });
   }
+
+  async updatePassword(req: Request, res: Response) {
+    const { id, newPassword } = req.body;
+    const updateData = await this.LoginService.updatePassword(Number(id), newPassword);
+    return res.status(200).json({ message: updateData });
+  }
 }

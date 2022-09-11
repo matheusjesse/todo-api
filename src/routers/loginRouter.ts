@@ -24,5 +24,10 @@ router.delete(
   validationToken.tokenValidation,
   (req, res) => loginController.deleteUser(req, res),
 );
+router.patch(
+  '/',
+  validation.loginPassworUpdate,
+  (req, res) => loginController.updatePassword(req, res),
+);
 
 export default router;

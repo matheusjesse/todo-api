@@ -43,4 +43,14 @@ export default class LoginService implements ILoginService {
     });
     return 'User deleted';
   };
+
+  updatePassword = async (id: number, newPassword: string): Promise<string> => {
+    await User.update({ password: newPassword }, {
+      where: {
+        id,
+      },
+    });
+
+    return 'Password updated';
+  };
 }
