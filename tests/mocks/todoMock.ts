@@ -90,3 +90,10 @@ export const todoMock: ITodoUpdate[] =
         "saturday": true
     }
  }
+
+ export const todoPatchMockResponse = {
+  "id": 1,
+  "noteText": "Beber àgua",
+  "completed": false,
+  "userId": 1
+}
