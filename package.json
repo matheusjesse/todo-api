@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require ts-node/register __tests__/**/*.test.ts --exit",
+    "test:integration": "mocha --require ts-node/register --extensions ts,tsx --watch --watch-files ./ 'tests/**/*.{ts,tsx}'",
     "start": "npm run build && node ./dist/index.js",
     "dev": "tsnd src/index.ts",
     "build": "tsc",

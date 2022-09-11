@@ -6,3 +6,4 @@ src/database/seeders
 src/database/config
 src/database/models/index.ts
 src/schemas
+tests/integration
