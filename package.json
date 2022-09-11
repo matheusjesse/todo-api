@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:integration": "mocha --require ts-node/register --extensions ts,tsx --watch --watch-files ./ 'tests/**/*.{ts,tsx}'",
-    "start": "npm run build && node ./dist/index.js",
+    "start": "npm run build && node ./dist/src/index.js",
     "dev": "tsnd src/index.ts",
     "build": "tsc",
     "db:reset": "npx -y tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create"
