@@ -111,7 +111,7 @@ Populando o banco de dados
 
 <pre>
 
-    Status: 201 OK
+    Status: 201
 ```    
     {
       "id": 6,
@@ -378,7 +378,7 @@ Populando o banco de dados
 
 <pre>
 
-    Status: 201 OK
+    Status: 201
 ```    
     {
       "message": "User registered"
