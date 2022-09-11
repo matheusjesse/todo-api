@@ -41,9 +41,7 @@ describe('Todos', () => {
           .set({ Authorization: token})
           .send({ daysOfTheWeek, dayPeriod, userId });
       expect(response.status).to.eq(400);
-    })
-    
-    
+    })    
   })
 });
 

@@ -71,3 +71,22 @@ export const todoMock: ITodoUpdate[] =
     "dayPeriodId": 6,
     "userId": "1"
   }
+
+  export const todoPutMockBody = {
+    "id": 1,
+     "noteText": "Beber àgua",
+    "dayPeriod": {
+         "morning": false,
+         "afternoon": false,
+         "night": false
+    },
+    "daysOfTheWeek": {
+        "sunday": false,
+        "monday": true,
+        "tuesday": true,
+        "wednesday": true,
+        "thrusday": true,
+        "friday": true,
+        "saturday": true
+    }
+ }
