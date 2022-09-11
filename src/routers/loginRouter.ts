@@ -26,6 +26,7 @@ router.delete(
 );
 router.patch(
   '/',
+  validationToken.tokenValidation,
   validation.loginPassworUpdate,
   (req, res) => loginController.updatePassword(req, res),
 );
