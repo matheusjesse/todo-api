@@ -1,12 +1,13 @@
 import express, { Request, Response } from 'express';
 import loginRouter from './routers/loginRouter';
 import todoRouter from './routers/todoRouter';
+import 'dotenv/config';
 
 const app = express();
 
 app.use(express.json());
 
-const PORT = 8000;
+const PORT = process.env.APP_PORT;
 
 app.use('/login', loginRouter);
 app.use('/todos', todoRouter);
