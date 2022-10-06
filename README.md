@@ -29,6 +29,10 @@ Populando o banco de dados
 ```
      npx sequelize db:seed:all
 ```
+## Testes Integração
+```
+    npm run test:integration
+```
 ## ToDos
 
 `GET /todos/user/:id` 
