@@ -1,11 +1,13 @@
 import express, { Request, Response } from 'express';
 import loginRouter from './routers/loginRouter';
 import todoRouter from './routers/todoRouter';
+import cors from 'cors';
 import 'dotenv/config';
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 const PORT = process.env.APP_PORT;
 
